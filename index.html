@@ -61,7 +61,7 @@
 }
 
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html,body{margin:0;padding:0;height:100%;}
+html,body{margin:0;padding:0;height:100%;max-width:100%;overflow-x:hidden;}
 body{
   font-family:var(--ff);color:var(--ink);background:var(--page);
   line-height:1.45;-webkit-font-smoothing:antialiased;font-weight:500;
@@ -313,6 +313,11 @@ textarea.cust,textarea.fieldtext{resize:vertical;line-height:1.45;}
 .morelink.open svg{transform:rotate(180deg);}
 .more-fields{display:none;}
 .more-fields.show{display:block;}
+.assistant-btn{justify-content:flex-start;gap:10px;text-align:left;margin-top:4px;}
+.assistant-btn svg{flex:none;}
+.assistant-btn span{flex:1;font-weight:700;color:var(--blue-700);}
+.assistant-btn .rchev{width:16px;height:16px;color:var(--blue-300);}
+.assistant-summary{margin-top:6px;padding:0 4px;font-size:12.5px;color:var(--muted);font-weight:600;}
 .combo{display:flex;flex-direction:column;gap:6px;}
 .cust[hidden]{display:none;}
 
@@ -364,33 +369,48 @@ textarea.cust,textarea.fieldtext{resize:vertical;line-height:1.45;}
 /* ============================================================
    APERÇU / CAHIER JOURNAL (document imprimable — inchangé)
    ============================================================ */
-#preview-mode{display:none;padding:20px 14px 100px;max-width:900px;margin:0 auto;}
+#preview-mode{display:none;padding:20px 14px 100px;max-width:900px;margin:0 auto;width:100%;overflow-x:hidden;}
+#preview-mode *{max-width:100%;}
 .preview-toolbar{
   position:sticky;top:10px;z-index:50;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
   background:rgba(247,245,247,.95);backdrop-filter:blur(10px);
   padding:12px;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow-soft);margin-bottom:22px;
 }
-.doc-page{background:#fff;border-radius:12px;box-shadow:var(--shadow-doc);padding:40px 45px;color:var(--ink);font-family:var(--ff);border-top:6px solid var(--rose-300);margin-bottom:30px;}
+.doc-page{background:#fff;border-radius:12px;box-shadow:var(--shadow-doc);padding:40px 45px;color:var(--ink);font-family:var(--ff);border-top:6px solid var(--rose-300);margin-bottom:30px;overflow-wrap:break-word;word-break:break-word;}
 .doc-page:first-child{margin-top:0;}
 .doc-header{text-align:center;margin-bottom:35px;padding-top:10px;}
-.doc-title-wrapper{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:18px;}
-.doc-title{font-family:var(--ff-script);color:var(--blue-700);font-size:54px;font-weight:400;margin:0;line-height:1;}
+.doc-title-wrapper{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;margin-bottom:18px;}
+.doc-title{font-family:var(--ff-script);color:var(--blue-700);font-size:54px;font-weight:400;margin:0;line-height:1;max-width:100%;}
 .doc-subtitle{font-family:var(--ff);font-size:14px;font-weight:700;color:var(--rose-600);letter-spacing:.1em;text-transform:uppercase;background:var(--rose-50);padding:4px 10px;border-radius:999px;display:inline-block;margin-left:10px;transform:translateY(-12px);border:1px solid var(--rose-100);}
-.doc-divider{height:1.5px;width:140px;background:var(--rose-200);margin:0 auto 18px;}
-.doc-decor{color:var(--rose-400);width:28px;height:28px;transform:translateY(-6px);}
+.doc-divider{height:1.5px;width:140px;max-width:60%;background:var(--rose-200);margin:0 auto 18px;}
+.doc-decor{color:var(--rose-400);width:28px;height:28px;transform:translateY(-6px);flex:none;}
 .doc-meta{font-size:17.5px;font-weight:600;color:var(--ink);font-family:var(--ff);}
-.doc-session{border:1px solid var(--line);border-radius:12px;padding:25px;margin-bottom:30px;background:#fff;}
-.doc-time{font-size:19px;font-weight:700;color:var(--rose-600);border-bottom:1px dashed var(--rose-300);padding-bottom:8px;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
-.doc-time::before{content:"";display:inline-block;width:12px;height:12px;background:var(--rose-300);border-radius:50%;}
+.doc-session{border:1px solid var(--line);border-radius:12px;padding:25px;margin-bottom:30px;background:#fff;overflow-wrap:break-word;word-break:break-word;}
+.doc-time{font-size:19px;font-weight:700;color:var(--rose-600);border-bottom:1px dashed var(--rose-300);padding-bottom:8px;margin-bottom:20px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+.doc-time::before{content:"";display:inline-block;width:12px;height:12px;background:var(--rose-300);border-radius:50%;flex:none;}
 .doc-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;margin-bottom:20px;}
 .doc-grid-1{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
 .doc-section-title{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--blue-700);background:var(--blue-50);padding:7px 12px;border-radius:6px;margin:25px 0 15px;border-left:3px solid var(--blue-300);}
-.doc-item{font-size:15px;line-height:1.5;}
+.doc-item{font-size:15px;line-height:1.5;min-width:0;}
 .doc-item strong{color:var(--blue-700);font-weight:700;margin-right:5px;}
-.doc-block{background:var(--rose-50);border-left:3px solid var(--rose-300);padding:14px 18px;border-radius:6px;font-size:15px;white-space:pre-wrap;line-height:1.55;color:var(--ink);}
+.doc-block{background:var(--rose-50);border-left:3px solid var(--rose-300);padding:14px 18px;border-radius:6px;font-size:15px;white-space:pre-wrap;line-height:1.55;color:var(--ink);overflow-wrap:break-word;word-break:break-word;}
 .doc-empty-val{color:var(--placeholder);letter-spacing:2px;}
-.doc-bilan{background:var(--blue-50);border:1px solid var(--blue-100);padding:20px;border-radius:12px;margin-top:40px;}
+.doc-bilan{background:var(--blue-50);border:1px solid var(--blue-100);padding:20px;border-radius:12px;margin-top:40px;overflow-wrap:break-word;word-break:break-word;}
 .doc-bilan-title{font-weight:700;color:var(--blue-700);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+
+/* ---------- Aperçu responsive à l'écran (n'affecte pas l'impression/PDF ci-dessous) ---------- */
+@media screen and (max-width:640px){
+  #preview-mode{padding:14px 10px 100px;}
+  .doc-page{padding:22px 16px;border-radius:10px;}
+  .doc-session{padding:16px;border-radius:10px;}
+  .doc-title{font-size:34px;}
+  .doc-subtitle{margin-left:0;transform:none;font-size:11px;}
+  .doc-meta{font-size:15px;}
+  .doc-time{font-size:16px;}
+  .doc-grid-2{grid-template-columns:1fr;gap:12px;}
+  .doc-section-title{font-size:12.5px;padding:6px 10px;margin:18px 0 12px;}
+  .doc-item,.doc-block{font-size:14px;}
+}
 
 /* ---------- Modale assistant complet (desktop-friendly, réutilisée) ---------- */
 dialog#modal{border:none;border-radius:20px;padding:0;max-width:680px;width:calc(100% - 32px);box-shadow:0 30px 70px -25px rgba(70,45,65,.55);color:var(--ink);}
@@ -1132,6 +1152,7 @@ function openSheet(id){
   activeSheet=id;
 }
 function closeSheet(){
+  if(activeSheet==='sheetAdd'){discardPendingQuickRow();}
   if(activeSheet){const el=document.getElementById(activeSheet);if(el)el.classList.remove('show');}
   $('#sheetBackdrop').classList.remove('show');
   activeSheet=null;
@@ -1192,32 +1213,27 @@ $('#sheetCalendarBody').addEventListener('click',e=>{
 /* ============================================================
    AJOUT / MODIFICATION RAPIDE D'UNE SÉANCE (bottom sheet)
    ============================================================ */
-let qMode='add',qDayIso=null,qRowId=null,qdraft=null,moreOpen=false;
-const SMART_Q=['competence','objectif','supports','remarques'];
+let qMode='add',qDayIso=null,qRowId=null,qTempRowId=null,qdraft=null;
 
 function chip(label,value,selected){
   return `<button type="button" class="chip ${value===selected&&value!==''?'sel':''}" data-chip="${esc(value)}">${esc(label)}</button>`;
 }
-/* ---- Chaîne pédagogique dépendante, réutilise le programme officiel existant ---- */
-const qGetProgram=()=>PROGRAMS[programKey(qdraft.classe)]||[];
-const qProjLabel=p=>`Projet ${p.n} — ${p.titre}`;
-const qGetProjet=()=>qGetProgram().find(p=>qProjLabel(p)===qdraft.projet);
-const qGetObjets=()=>{const p=qGetProjet();return p?p.objets:[];};
-const qGetObjet=()=>qGetObjets().find(o=>o.oe===qdraft.objet);
-const qGetSequences=()=>{const o=qGetObjet();return o?o.sequences:[];};
-function qAutofill(){
-  const s=suggestFor(qdraft.activites,qdraft.objet);
-  const map={competence:'competences',objectif:'objectifs',supports:'supports',remarques:'observations'};
-  for(const f of SMART_Q){
-    const first=(s[map[f]]||[])[0]||'';
-    if(!qdraft[f]||qdraft._auto[f]){qdraft[f]=first;qdraft._auto[f]=true;}
-  }
+/* ---- Résumé de la fiche pédagogique (remplie via la fenêtre « assistant » séparée) ---- */
+function computePedagoSummary(det){
+  if(!det)return null;
+  const has=det.projet||det.objet||det.sequence||det.competence||det.objectif||det.supports;
+  if(!has)return null;
+  const bits=[];
+  const pm=(det.projet||'').match(/^Projet\s*(\d+)/);
+  if(pm)bits.push('Projet '+pm[1]);
+  if(det.seance)bits.push(det.seance);
+  return bits.length?bits.join(' · '):'Fiche pédagogique renseignée';
 }
 function buildHeureField(){
   const hasVal=!!qdraft.heure;
   const triggerLabel=hasVal?qdraft.heure:'Sélectionner un créneau';
   const rows=HEURE_SLOTS.map(h=>{
-    const used=heureUsedBy(qDayIso,h,qRowId);
+    const used=heureUsedBy(qDayIso,h,qRowId||qTempRowId);
     const isSel=qdraft.heure===h;
     const cls=['heure-option'];if(isSel)cls.push('sel');if(used)cls.push('used');
     return `<button type="button" class="${cls.join(' ')}" data-heure-opt="${esc(h)}">
@@ -1254,10 +1270,6 @@ function buildHeureField(){
 function renderQuickSheetBody(){
   const niv=qdraft.niveau;
   const filItems=FILIERES[niv]||[];
-  const projOpts=qGetProgram().map(qProjLabel);
-  const objOpts=qGetObjets().map(o=>o.oe);
-  const seqOpts=qGetSequences();
-  const s=suggestFor(qdraft.activites,qdraft.objet);
   $('#sheetAddBody').innerHTML=`
     ${buildHeureField()}
     <div class="field-group"><label>Classe</label>
@@ -1267,91 +1279,90 @@ function renderQuickSheetBody(){
     <div class="field-group"><label>Séance</label>
       ${combo({attrs:'data-qfield="activites"',value:qdraft.activites,options:Object.keys(SEANCES),ph:'— type de séance —'})}
     </div>
-    <button type="button" class="morelink ${moreOpen?'open':''}" id="qMoreToggle">
-      Plus de détails — assistant pédagogique <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+    <button type="button" class="btn ghost block assistant-btn" id="qOpenAssistant">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span>${qdraft.pedago?'Fiche pédagogique renseignée':'Plus de détails — assistant pédagogique'}</span>
+      <svg class="rchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
     </button>
-    <div class="more-fields ${moreOpen?'show':''}" id="qMoreFields">
-      <div class="field-group"><label>Projet</label>
-        ${combo({attrs:'data-qfield="projet"',value:qdraft.projet,options:projOpts,ph:qdraft.classe?'— projet —':'Choisir d\'abord la classe'})}
-      </div>
-      <div class="field-group"><label>Objet d'étude</label>
-        ${combo({attrs:'data-qfield="objet"',value:qdraft.objet,options:objOpts,ph:qdraft.projet?'— objet d\'étude —':'Choisir d\'abord le projet'})}
-      </div>
-      <div class="field-group"><label>Séquence</label>
-        ${combo({attrs:'data-qfield="sequence"',value:qdraft.sequence,options:seqOpts,multiline:true,ph:qdraft.objet?'— séquence —':'Choisir d\'abord l\'objet'})}
-      </div>
-      <div class="field-group"><label>Compétence visée</label>
-        ${combo({attrs:'data-qfield="competence"',value:qdraft.competence,options:s.competences,multiline:true,ph:'— compétence —'})}
-      </div>
-      <div class="field-group"><label>Objectif d'apprentissage</label>
-        ${combo({attrs:'data-qfield="objectif"',value:qdraft.objectif,options:s.objectifs,multiline:true,ph:'— objectif —'})}
-      </div>
-      <div class="field-group"><label>Support</label>
-        ${combo({attrs:'data-qfield="supports"',value:qdraft.supports,options:s.supports,multiline:true,ph:'— support —'})}
-      </div>
-      <div class="field-group"><label>Remarques</label>
-        ${combo({attrs:'data-qfield="remarques"',value:qdraft.remarques,options:s.observations,multiline:true,ph:'— observation —'})}
-      </div>
-    </div>
+    ${qdraft.pedago?`<div class="assistant-summary">${esc(qdraft.pedago)}</div>`:''}
   `;
 }
 function openAddSheet(){
-  qMode='add';qDayIso=currentDate;qRowId=null;
+  qMode='add';qDayIso=currentDate;qRowId=null;qTempRowId=null;
   const lu=state.lastUsed;
   qdraft={
     heure:'',heureOpen:false,heureCustomOn:false,customStart:'',customEnd:'',conflictHeure:null,
     niveau:lu.classe?lu.classe.split('-')[0]:'',
     classe:lu.classe||'',
     activites:lu.activites||'',
-    projet:lu.projet||'',objet:lu.objet||'',sequence:lu.sequence||'',
-    competence:'',objectif:'',supports:'',remarques:'',
-    _auto:{competence:true,objectif:true,supports:true,remarques:true}
+    pedago:null
   };
-  qAutofill();
   $('#sheetAddTitle').textContent='Ajouter une séance';
   $('#sheetAddSub').textContent=dateBadgeSub(currentDate);
-  moreOpen=false;
   renderQuickSheetBody();
   openSheet('sheetAdd');
 }
 function openEditSheet(dayId,rowId){
   const day=findDay(dayId);const r=day&&day.rows.find(x=>x.id===rowId);if(!r)return;
-  qMode='edit';qDayIso=day.date;qRowId=rowId;
+  qMode='edit';qDayIso=day.date;qRowId=rowId;qTempRowId=null;
   const det=r.details||{};
   qdraft={
     heure:r.heure||'',heureOpen:false,heureCustomOn:false,customStart:'',customEnd:'',conflictHeure:null,
     niveau:r.classe?r.classe.split('-')[0]:(det.niveau||''),
     classe:r.classe||det.filiere||'',
     activites:r.activites||det.seance||'',
-    projet:det.projet||'',objet:det.objet||'',sequence:det.sequence||'',
-    competence:det.competence||'',objectif:det.objectif||'',supports:det.supports||'',
-    remarques:r.remarques||det.remarques||'',
-    _auto:Object.assign({competence:false,objectif:false,supports:false,remarques:false},det._auto||{})
+    pedago:computePedagoSummary(det)
   };
   $('#sheetAddTitle').textContent='Modifier la séance';
   $('#sheetAddSub').textContent=dateBadgeSub(day.date);
-  moreOpen=!!(qdraft.projet||qdraft.objet||qdraft.sequence||qdraft.competence||qdraft.objectif||qdraft.supports);
   renderQuickSheetBody();
   openSheet('sheetAdd');
+}
+/* ---- Ouvre la fenêtre 2 (assistant pédagogique), liée par sessionId à la séance en cours ---- */
+function openPedagogicalAssistant(){
+  const day=getOrCreateDay(qDayIso);
+  let r;
+  if(qMode==='edit'){
+    r=day.rows.find(x=>x.id===qRowId);
+  }else{
+    r=qTempRowId?day.rows.find(x=>x.id===qTempRowId):null;
+    if(!r){r=makeRow();day.rows.push(r);qTempRowId=r.id;}
+  }
+  if(!r)return;
+  r.heure=qdraft.heure;r.classe=qdraft.classe;r.activites=qdraft.activites;
+  if(qdraft.classe)r.details.filiere=qdraft.classe;
+  if(qdraft.niveau)r.details.niveau=qdraft.niveau;
+  if(SEANCES[qdraft.activites])r.details.seance=qdraft.activites;
+  persist();
+  openModal(day.id,r.id);
+}
+/* ---- Discarde la séance temporaire si l'ajout est annulé avant l'enregistrement final ---- */
+function discardPendingQuickRow(){
+  if(qMode==='add'&&qTempRowId){
+    const day=findDayByDate(qDayIso);
+    if(day){day.rows=day.rows.filter(r=>r.id!==qTempRowId);persist();}
+  }
+  qTempRowId=null;
 }
 function saveQuick(){
   if(!qdraft.heure){toast('Choisissez un horaire','info');return;}
   if(!qdraft.activites){toast('Choisissez un type de séance','info');return;}
   const day=getOrCreateDay(qDayIso);
   const applyToRow=r=>{
-    r.heure=qdraft.heure;r.classe=qdraft.classe;r.activites=qdraft.activites;r.remarques=qdraft.remarques;
+    r.heure=qdraft.heure;r.classe=qdraft.classe;r.activites=qdraft.activites;
     r.details.niveau=qdraft.niveau;r.details.filiere=qdraft.classe;
-    r.details.projet=qdraft.projet;r.details.objet=qdraft.objet;r.details.sequence=qdraft.sequence;
     if(SEANCES[qdraft.activites])r.details.seance=qdraft.activites;
-    r.details.competence=qdraft.competence;r.details.objectif=qdraft.objectif;r.details.supports=qdraft.supports;
-    r.details.remarques=qdraft.remarques;r.details._auto=qdraft._auto;
   };
+  let r;
   if(qMode==='edit'){
-    const r=day.rows.find(x=>x.id===qRowId);if(!r){closeSheet();return;}
+    r=day.rows.find(x=>x.id===qRowId);if(!r){closeSheet();return;}
     applyToRow(r);rememberLastUsed(r);
     toast('Séance mise à jour','ok');
   }else{
-    const r=makeRow();applyToRow(r);day.rows.push(r);rememberLastUsed(r);
+    r=qTempRowId?day.rows.find(x=>x.id===qTempRowId):null;
+    if(!r){r=makeRow();day.rows.push(r);}
+    applyToRow(r);rememberLastUsed(r);
+    qTempRowId=null;
     toast('Séance enregistrée','ok');
   }
   markDirty();persist();closeSheet();renderHome();
@@ -1366,7 +1377,7 @@ $('#sheetAddBody').addEventListener('click',e=>{
   }
   const conflictEdit=e.target.closest('#qConflictEdit');
   if(conflictEdit){
-    const used=heureUsedBy(qDayIso,qdraft.conflictHeure,qRowId);
+    const used=heureUsedBy(qDayIso,qdraft.conflictHeure,qRowId||qTempRowId);
     closeSheet();
     if(used){const day=getOrCreateDay(qDayIso);openEditSheet(day.id,used.id);}
     return;
@@ -1389,7 +1400,7 @@ $('#sheetAddBody').addEventListener('click',e=>{
     const en=document.getElementById('qCustomEnd').value;
     if(!st||!en){toast('Renseignez les deux heures','info');return;}
     const label=`${st} – ${en}`;
-    const used=heureUsedBy(qDayIso,label,qRowId);
+    const used=heureUsedBy(qDayIso,label,qRowId||qTempRowId);
     qdraft.customStart=st;qdraft.customEnd=en;
     if(used){qdraft.conflictHeure=label;renderQuickSheetBody();return;}
     qdraft.heure=label;qdraft.heureCustomOn=false;qdraft.heureOpen=false;
@@ -1399,7 +1410,7 @@ $('#sheetAddBody').addEventListener('click',e=>{
   const heureOpt=e.target.closest('.heure-option[data-heure-opt]');
   if(heureOpt){
     const val=heureOpt.dataset.heureOpt;
-    const used=heureUsedBy(qDayIso,val,qRowId);
+    const used=heureUsedBy(qDayIso,val,qRowId||qTempRowId);
     if(used){qdraft.conflictHeure=val;renderQuickSheetBody();return;}
     qdraft.heure=val;qdraft.heureCustomOn=false;qdraft.conflictHeure=null;qdraft.heureOpen=false;
     renderQuickSheetBody();
@@ -1408,42 +1419,35 @@ $('#sheetAddBody').addEventListener('click',e=>{
   const nivChip=e.target.closest('#qNiveauRow .chip');
   if(nivChip){
     const newNiv=nivChip.dataset.chip;
-    if(qdraft.niveau!==newNiv){qdraft.classe='';qdraft.projet='';qdraft.objet='';qdraft.sequence='';}
-    qdraft.niveau=newNiv;qAutofill();renderQuickSheetBody();return;
+    if(qdraft.niveau!==newNiv){qdraft.classe='';}
+    qdraft.niveau=newNiv;renderQuickSheetBody();return;
   }
   const filChip=e.target.closest('#qFiliereRow .chip');
   if(filChip){
-    qdraft.classe=filChip.dataset.chip;qdraft.projet='';qdraft.objet='';qdraft.sequence='';
-    qAutofill();renderQuickSheetBody();return;
+    qdraft.classe=filChip.dataset.chip;
+    renderQuickSheetBody();return;
   }
-  const moreBtn=e.target.closest('#qMoreToggle');
-  if(moreBtn){moreOpen=!moreOpen;$('#qMoreToggle').classList.toggle('open',moreOpen);$('#qMoreFields').classList.toggle('show',moreOpen);return;}
+  const asstBtn=e.target.closest('#qOpenAssistant');
+  if(asstBtn){openPedagogicalAssistant();return;}
 });
 $('#sheetAddBody').addEventListener('change',e=>{
   const s=e.target.closest('[data-role="sel"]');if(!s)return;
   const field=s.dataset.qfield;const box=s.closest('.combo');const cust=box?box.querySelector('[data-role="cust"]'):null;
   if(s.value==='__autre__'){
     if(cust){cust.hidden=false;qdraft[field]=cust.value||'';cust.focus();}
-    if(SMART_Q.includes(field))qdraft._auto[field]=false;
     return;
   }
   if(cust)cust.hidden=true;
   qdraft[field]=s.value;
-  if(field==='projet'){qdraft.objet='';qdraft.sequence='';}
-  else if(field==='objet'){qdraft.sequence='';}
-  if(SMART_Q.includes(field))qdraft._auto[field]=false;
-  if(['projet','objet','activites'].includes(field))qAutofill();
-  renderQuickSheetBody();
 });
 $('#sheetAddBody').addEventListener('input',e=>{
   if(e.target.id==='qCustomStart'){qdraft.customStart=e.target.value;return;}
   if(e.target.id==='qCustomEnd'){qdraft.customEnd=e.target.value;return;}
   const cu=e.target.closest('[data-role="cust"]');
-  if(cu){
-    const field=cu.dataset.qfield;qdraft[field]=cu.value;
-    if(SMART_Q.includes(field))qdraft._auto[field]=false;
-  }
+  if(cu)qdraft[cu.dataset.qfield]=cu.value;
 });
+
+
 
 
 
@@ -1949,6 +1953,23 @@ function toast(msg,kind='ok',ms=2200){
 /* ---------- Démarrage ---------- */
 $('#year').value=state.schoolYear;
 $('#year').addEventListener('input',e=>{state.schoolYear=e.target.value;markDirty();});
+/* Synchronise la fenêtre 1 (Ajouter une séance) quand la fenêtre 2 (assistant
+   pédagogique) se ferme — enregistrée ici, une fois que `modal` (défini plus
+   haut avec le reste de l'assistant) existe bien. */
+modal.addEventListener('close',()=>{
+  if(activeSheet!=='sheetAdd')return;
+  const day=findDayByDate(qDayIso);
+  const rid=qMode==='edit'?qRowId:qTempRowId;
+  if(!day||!rid)return;
+  const r=day.rows.find(x=>x.id===rid);
+  if(!r)return;
+  qdraft.heure=r.heure||qdraft.heure;
+  qdraft.classe=r.classe||qdraft.classe;
+  qdraft.niveau=qdraft.classe?qdraft.classe.split('-')[0]:qdraft.niveau;
+  qdraft.activites=r.activites||qdraft.activites;
+  qdraft.pedago=computePedagoSummary(r.details);
+  renderQuickSheetBody();
+});
 renderHome();
 setStatus('saved');
 </script>
